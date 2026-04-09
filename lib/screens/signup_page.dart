@@ -1,4 +1,5 @@
 import 'package:chattingapp/screens/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatelessWidget {
@@ -89,9 +90,24 @@ class SignupPage extends StatelessWidget {
 
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
-                  print("Signup success");
+
+                  try{
+
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text.trim(),);
+
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Sigup Successful")),);
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => LoginPage()),
+                    );
+                  } on FirebaseAuthException catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(e.message ?? "Signup Failed")),
+                    );
+                  }
                 }
               },
               child: Text("Sign Up"),
