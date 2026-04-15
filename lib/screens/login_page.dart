@@ -60,7 +60,7 @@ class LoginPage extends StatelessWidget {
                     return "Enter Password";
                   }
                   if(value.length < 6) {
-                    return "Password must be atleast 6 characters";
+                    return "Password must be at least 6 characters";
                   }
                   return null;
                 },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'chat_page.dart';
 import 'login_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -32,12 +33,22 @@ class HomePage extends StatelessWidget {
             leading: CircleAvatar(child: Icon(Icons.person)),
             title: Text("User 1"),
             subtitle: Text("Hey There!"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => ChatPage(userName: "User 1"),),);
+            },
           ),
 
           ListTile(
             leading: CircleAvatar(child: Icon(Icons.person)),
             title: Text("User 2"),
             subtitle: Text("What are you doing?"),
+            onTap: () {
+              Navigator.push(
+                context, MaterialPageRoute(builder: (_) => ChatPage(userName: "User 2"),),
+              );
+            },
           ),
         ],
       ),
